@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Book App</string>
+    <string name="new_user_signup">New user? <b>Sign Up</b></string><!--Make signu op bold-->
 </resources>
