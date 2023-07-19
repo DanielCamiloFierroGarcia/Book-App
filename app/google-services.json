@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "833327579364",
+    "project_id": "spotifyclone-949b1",
+    "storage_bucket": "spotifyclone-949b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833327579364:android:f2eee614c07c8360a76cf1",
+        "android_client_info": {
+          "package_name": "com.example.bookapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833327579364-10coenaeq47j784630k5nv77mttbna9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQHr_PuiY9RVA2CDQdEpWROcyPul8iUio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833327579364-10coenaeq47j784630k5nv77mttbna9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
