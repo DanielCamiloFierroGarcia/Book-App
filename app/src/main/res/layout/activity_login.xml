@@ -85,7 +85,7 @@
                     android:background="@drawable/shape_edittext01"
                     android:drawableStart="@drawable/ic_lock_gray"
                     android:drawablePadding="10dp"
-                    android:hint="Email"
+                    android:hint="Password"
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:textColor="@color/black"
