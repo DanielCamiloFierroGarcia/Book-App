@@ -37,7 +37,7 @@ class DashboardAdminActivity : AppCompatActivity() {
         //search
         binding.searchEt.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
+//ayuda?
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -62,6 +62,11 @@ class DashboardAdminActivity : AppCompatActivity() {
         //click add category
         binding.addcategoryBtn.setOnClickListener {
             startActivity(Intent(this, CategoryAddActivity::class.java))
+        }
+
+        //handle click add pdf
+        binding.addPdfFab.setOnClickListener {
+            startActivity(Intent(this, PdfAddActivity::class.java))
         }
     }
 

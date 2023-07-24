@@ -82,6 +82,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun updateUserInfo() {
         progressDialog.setMessage("Saving user info..")
+        progressDialog.show()
 
         val timestamp = System.currentTimeMillis()
 
