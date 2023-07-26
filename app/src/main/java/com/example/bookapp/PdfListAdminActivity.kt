@@ -59,6 +59,10 @@ class PdfListAdminActivity : AppCompatActivity() {
 
             }
         })
+        //handle click, go back
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun loadPdfList() {
@@ -68,7 +72,7 @@ class PdfListAdminActivity : AppCompatActivity() {
         ref.orderByChild("categoryId").equalTo(categoryId)
             .addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    //clear list befor start adding data
+                    //clear list before start adding data
                     pdfArrayList.clear()
                     for(ds in snapshot.children){
                         //get data
