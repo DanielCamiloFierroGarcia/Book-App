@@ -163,6 +163,34 @@ class MyApplication: Application() {
                     Toast.makeText(context, "Failed to delete from storage due to ${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
+
+        fun incrementBookViewCount(bookId: String){
+            //Get book views count
+            val ref = FirebaseDatabase.getInstance().getReference("Books")
+            ref.child(bookId)
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        //get views count
+                        var viewsCount = "${snapshot.child("viewsCount").value}"
+                        if(viewsCount == "" || viewsCount == "null"){
+                            viewsCount = "0"
+                        }
+                        //Increment views count
+                        val newViewsCount = viewsCount.toLong() + 1
+                        //setup data to update in db
+                        val hashMap = HashMap<String, Any>()
+                        hashMap["viewsCount"] = newViewsCount
+                        //set to db
+                        val dbref = FirebaseDatabase.getInstance().getReference("Books")
+                        dbref.child(bookId)
+                            .updateChildren(hashMap)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
+                })
+        }
     }
 
 }
