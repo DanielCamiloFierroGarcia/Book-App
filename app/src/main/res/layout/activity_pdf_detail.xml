@@ -38,6 +38,7 @@
 
     <!--All content under scroll-->
     <ScrollView
+        android:layout_above="@id/bookOptionsLl"
         android:layout_width="match_parent"
         android:padding="10dp"
         android:layout_below="@id/toolbarRl"
@@ -246,5 +247,25 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <!--Buttons for book options-->
+    <LinearLayout
+        android:id="@+id/bookOptionsLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/design_default_color_primary">
+
+        <Button
+            android:id="@+id/readBookBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Read"
+            android:drawableTop="@drawable/ic_book_white"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
 
 </RelativeLayout>
