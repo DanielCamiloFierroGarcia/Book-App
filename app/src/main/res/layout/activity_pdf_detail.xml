@@ -262,17 +262,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Read"
+            android:textSize="10sp"
             android:drawableTop="@drawable/ic_book_white"
             android:layout_weight="1"/>
 
         <!--Button bowload book-->
         <Button
             android:id="@+id/downloadsBookBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Download"
+            android:textSize="10sp"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_download_white"/>
+
+        <!--Button : add/remove favorite-->
+        <Button
+            android:id="@+id/favoriteBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:drawableTop="@drawable/ic_favorite_border_white"
+            android:text="Add favorite"
+            android:layout_weight="1"/>
 
 
     </LinearLayout>

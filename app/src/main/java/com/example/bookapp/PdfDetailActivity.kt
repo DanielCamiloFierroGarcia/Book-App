@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.bookapp.databinding.ActivityPdfDetailBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -26,6 +27,9 @@ class PdfDetailActivity : AppCompatActivity() {
     private var bookId = ""
     private var bookTitle = ""
     private var bookUrl = ""
+    private var isInMyFavorite = false
+    private lateinit var firebaseAuth: FirebaseAuth
+
     private lateinit var progressDialog: ProgressDialog
     private companion object{
         const val TAG = "BOOK_DETAILS_TAG"
@@ -40,6 +44,12 @@ class PdfDetailActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Please Wait")
         progressDialog.setCanceledOnTouchOutside(false)
+
+        //init firebase auth
+        firebaseAuth = FirebaseAuth.getInstance()
+        if(firebaseAuth.currentUser != null){
+            checkIsFavorite()
+        }
 
         //increment book view count, whenever this page starts
         MyApplication.incrementBookViewCount(bookId)
@@ -62,6 +72,21 @@ class PdfDetailActivity : AppCompatActivity() {
             else{
                 Log.d(TAG, "onCreate: Storage permisiion not granted, now request it")
                 requestStoragePermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+
+        binding.favoriteBtn.setOnClickListener {
+            //check if user is logged
+            if(firebaseAuth.currentUser == null){
+                Toast.makeText(this, "you are not logged in", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                if(isInMyFavorite){
+                    removeFromFavorite()
+                }
+                else{
+                    addToFavorite()
+                }
             }
         }
     }
@@ -185,5 +210,63 @@ class PdfDetailActivity : AppCompatActivity() {
 
                 }
             })
+    }
+
+    private fun checkIsFavorite(){
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!).child("Favorites").child(bookId)
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    isInMyFavorite = snapshot.exists()
+                    if(isInMyFavorite){
+                        binding.favoriteBtn.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_favorite_filled_white, 0, 0)
+                        binding.favoriteBtn.text = "Remove Favorite"
+                    }
+                    else{
+                        binding.favoriteBtn.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_favorite_border_white, 0, 0)
+                        binding.favoriteBtn.text = "Add Favorite"
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
+    }
+
+    private fun addToFavorite(){
+        Log.d(TAG, "addToFavorite: Adding to favs")
+        val timestamp = System.currentTimeMillis()
+        val hashMap = HashMap<String, Any>()
+        hashMap["bookId"] = bookId
+        hashMap["timestamp"] = timestamp
+        //save to db
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!).child("Favorites").child(bookId)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                Log.d(TAG, "addToFavorite: Added to fav")
+                Toast.makeText(this, "Added to fav", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "addToFavorite: Failed to add due to ${it.message}")
+                Toast.makeText(this, "Failed to add due to ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun removeFromFavorite(){
+        Log.d(TAG, "removeFormFavorite: Removing from fav")
+
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(firebaseAuth.uid!!).child("Favorites").child(bookId)
+            .removeValue()
+            .addOnSuccessListener {
+                Log.d(TAG, "removeFormFavorite: Removed from favs")
+                Toast.makeText(this, "Removed from fav", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "removeFormFavorite: Failed to remove from fav due to ${it.message}")
+                Toast.makeText(this, "Failed to remove due to ${it.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
