@@ -1,4 +1,4 @@
-package com.example.bookapp
+package com.example.bookapp.adapters
 
 import android.app.AlertDialog
 import android.content.Context
@@ -9,7 +9,12 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookapp.filters.FilterPdfAdmin
+import com.example.bookapp.MyApplication
+import com.example.bookapp.activities.PdfDetailActivity
+import com.example.bookapp.activities.PdfEditActivity
 import com.example.bookapp.databinding.RowPdfAdminBinding
+import com.example.bookapp.models.ModelPdf
 
 class AdapterPdfAdmin : RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>, Filterable{
 
@@ -70,7 +75,13 @@ class AdapterPdfAdmin : RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>, Fi
         //loadcategory
         MyApplication.loadCategory(categoryId = categoryId, holder.categoryTv)
         //we dont need page number here, pass null for page number||load pdf thumbnail
-        MyApplication.loadPdfFromUrlSinglePage(pdfUrl = pdfUrl, pdfTitle = title, pdfView = holder.pdfView, progressBar = holder.progressBar, pagesTv = null)
+        MyApplication.loadPdfFromUrlSinglePage(
+            pdfUrl = pdfUrl,
+            pdfTitle = title,
+            pdfView = holder.pdfView,
+            progressBar = holder.progressBar,
+            pagesTv = null
+        )
         //load pdf size
         MyApplication.loadPdfSize(pdfUrl = pdfUrl, pdfTitle = title, sizeTv = holder.sizeTv)
         //handle click, show dialog with options 1) edit book 2) delete book
@@ -85,7 +96,7 @@ class AdapterPdfAdmin : RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>, Fi
         }
     }
 
-    private fun moreOptionsDialog(model: ModelPdf, holder: AdapterPdfAdmin.HolderPdfAdmin) {
+    private fun moreOptionsDialog(model: ModelPdf, holder: HolderPdfAdmin) {
         //get id, url, title of book
         val bookId = model.id
         val bookUrl = model.url

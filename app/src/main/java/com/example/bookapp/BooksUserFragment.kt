@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import com.example.bookapp.adapters.AdapterPdfUser
 import com.example.bookapp.databinding.FragmentBooksUserBinding
+import com.example.bookapp.models.ModelPdf
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase

@@ -1,9 +1,10 @@
-package com.example.bookapp
+package com.example.bookapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.example.bookapp.Constants
 import com.example.bookapp.databinding.ActivityPdfViewBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

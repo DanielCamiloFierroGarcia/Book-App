@@ -1,4 +1,4 @@
-package com.example.bookapp
+package com.example.bookapp.adapters
 
 import android.app.AlertDialog
 import android.content.Context
@@ -13,7 +13,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.bookapp.filters.FilterCategory
+import com.example.bookapp.models.ModelCategory
+import com.example.bookapp.activities.PdfListAdminActivity
 import com.example.bookapp.databinding.RowCategoryBinding
 import com.google.firebase.database.FirebaseDatabase
 
@@ -78,7 +80,7 @@ class AdapterCategory: Adapter<AdapterCategory.HolderCategory>,Filterable {
         }
     }
 
-    private fun deleteCategory(model: ModelCategory, holder: AdapterCategory.HolderCategory) {
+    private fun deleteCategory(model: ModelCategory, holder: HolderCategory) {
         //get id of category to delete
         val id = model.id
         //Firebase DB > Categories > categoryId

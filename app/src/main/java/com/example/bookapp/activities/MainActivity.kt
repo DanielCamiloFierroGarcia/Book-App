@@ -1,4 +1,4 @@
-package com.example.bookapp
+package com.example.bookapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

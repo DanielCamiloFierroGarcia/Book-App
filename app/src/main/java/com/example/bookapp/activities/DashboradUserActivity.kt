@@ -1,15 +1,17 @@
-package com.example.bookapp
+package com.example.bookapp.activities
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.bookapp.databinding.ActivityDashboardAdminBinding
+import com.example.bookapp.BooksUserFragment
 import com.example.bookapp.databinding.ActivityDashboradUserBinding
+import com.example.bookapp.models.ModelCategory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -39,7 +41,10 @@ class DashboradUserActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-
+        //open profile
+        binding.profileBtn.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
     }
 
     private fun setupWithViewPAgerAdapter(viewPager: ViewPager){
@@ -147,14 +152,21 @@ class DashboradUserActivity : AppCompatActivity() {
         }
     }
 
+    //this activity can be opened with or without login, so hide logout and profile button if not logged in
     private fun checkUser() {
         val firebaseUser = firebaseAuth.currentUser
         if(firebaseUser == null){
             binding.subtitleTv.text = "Not logged in"
+            //hide profile logout
+            binding.profileBtn.visibility = View.GONE
+            binding.logoutBtn.visibility = View.GONE
         }
         else{
             val email = firebaseUser.email
             binding.subtitleTv.text = email
+
+            binding.profileBtn.visibility = View.VISIBLE
+            binding.logoutBtn.visibility = View.VISIBLE
         }
     }
 }

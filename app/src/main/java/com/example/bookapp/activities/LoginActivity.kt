@@ -1,4 +1,4 @@
-package com.example.bookapp
+package com.example.bookapp.activities
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import com.example.bookapp.databinding.ActivityLoginBinding
-import com.example.bookapp.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

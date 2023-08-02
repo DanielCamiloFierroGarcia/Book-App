@@ -1,4 +1,4 @@
-package com.example.bookapp
+package com.example.bookapp.activities
 
 import android.Manifest
 import android.app.ProgressDialog
@@ -11,6 +11,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.example.bookapp.Constants
+import com.example.bookapp.MyApplication
+import com.example.bookapp.R
 import com.example.bookapp.databinding.ActivityPdfDetailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -194,7 +197,13 @@ class PdfDetailActivity : AppCompatActivity() {
                     MyApplication.loadCategory(categoryId, binding.categoryTv)
 
                     //load pdf thumbanil pages count
-                    MyApplication.loadPdfFromUrlSinglePage("$bookUrl", "$bookTitle", binding.pdfView, binding.progressBar, binding.pagesTv)
+                    MyApplication.loadPdfFromUrlSinglePage(
+                        "$bookUrl",
+                        "$bookTitle",
+                        binding.pdfView,
+                        binding.progressBar,
+                        binding.pagesTv
+                    )
                     MyApplication.loadPdfSize("$bookUrl", "$bookTitle", binding.sizeTv)
 
                     //set data
@@ -219,11 +228,13 @@ class PdfDetailActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     isInMyFavorite = snapshot.exists()
                     if(isInMyFavorite){
-                        binding.favoriteBtn.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_favorite_filled_white, 0, 0)
+                        binding.favoriteBtn.setCompoundDrawablesWithIntrinsicBounds(0,
+                            R.drawable.ic_favorite_filled_white, 0, 0)
                         binding.favoriteBtn.text = "Remove Favorite"
                     }
                     else{
-                        binding.favoriteBtn.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_favorite_border_white, 0, 0)
+                        binding.favoriteBtn.setCompoundDrawablesWithIntrinsicBounds(0,
+                            R.drawable.ic_favorite_border_white, 0, 0)
                         binding.favoriteBtn.text = "Add Favorite"
                     }
                 }
