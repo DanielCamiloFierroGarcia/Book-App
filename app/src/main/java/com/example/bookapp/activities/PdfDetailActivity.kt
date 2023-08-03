@@ -85,7 +85,7 @@ class PdfDetailActivity : AppCompatActivity() {
             }
             else{
                 if(isInMyFavorite){
-                    removeFromFavorite()
+                    MyApplication.removeFromFavorite(this, bookId)
                 }
                 else{
                     addToFavorite()
@@ -262,22 +262,6 @@ class PdfDetailActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d(TAG, "addToFavorite: Failed to add due to ${it.message}")
                 Toast.makeText(this, "Failed to add due to ${it.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun removeFromFavorite(){
-        Log.d(TAG, "removeFormFavorite: Removing from fav")
-
-        val ref = FirebaseDatabase.getInstance().getReference("Users")
-        ref.child(firebaseAuth.uid!!).child("Favorites").child(bookId)
-            .removeValue()
-            .addOnSuccessListener {
-                Log.d(TAG, "removeFormFavorite: Removed from favs")
-                Toast.makeText(this, "Removed from fav", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Log.d(TAG, "removeFormFavorite: Failed to remove from fav due to ${it.message}")
-                Toast.makeText(this, "Failed to remove due to ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }
