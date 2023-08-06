@@ -89,7 +89,7 @@
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/gray01"/>
+                    android:textColorHint="@color/gray01" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
