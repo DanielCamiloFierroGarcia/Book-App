@@ -38,6 +38,11 @@ class LoginActivity : AppCompatActivity() {
         binding.loginBtn.setOnClickListener {
             validateData()
         }
+
+        binding.forgotPass.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        }
+
     }
 
     private var email = ""
